@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>ShambaSoko – Kenya’s Farm-to-Market Place</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f7ee;
+        --card: #fff;
+        --ink: #1d2a1c;
+        --mute: #5c6b58;
+        --green: #1e5b32;
+        --leaf: #3f9a4f;
+        --sun: #f4b400;
+        --line: #dfe6d6;
+        --onG: #fff;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #121a12;
+          --card: #1b261b;
+          --ink: #eaf2e4;
+          --mute: #9db097;
+          --green: #6fcf85;
+          --leaf: #4fb868;
+          --line: #2c3b2b;
+          --onG: #0f1f12;
+        }
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        scroll-behavior: smooth;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font:
+          16px/1.5 Figtree,
+          system-ui,
+          sans-serif;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Bricolage Grotesque", Georgia, sans-serif;
+        line-height: 1.1;
+        margin: 0;
+      }
+      a {
+        color: inherit;
+      }
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 18px;
+      }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 0;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .logo {
+        font:
+          800 1.4rem "Bricolage Grotesque",
+          sans-serif;
+        color: var(--green);
+        text-decoration: none;
+      }
+      .btn {
+        background: var(--green);
+        color: var(--onG);
+        border: 0;
+        border-radius: 10px;
+        padding: 11px 18px;
+        font:
+          600 1rem Figtree,
+          sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .btn.alt {
+        background: var(--sun);
+        color: #2b2100;
+      }
+      .btn.ghost {
+        background: transparent;
+        color: var(--green);
+        border: 2px solid var(--green);
+      }
+      .btn:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible,
+      .star:focus-visible {
+        outline: 3px solid var(--sun);
+        outline-offset: 2px;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+        align-items: center;
+        padding: 26px 0 34px;
+      }
+      .hero h1 {
+        font-size: clamp(2.2rem, 6vw, 3.8rem);
+        font-weight: 800;
+        color: var(--green);
+      }
+      .hero p {
+        font-size: 1.1rem;
+        color: var(--mute);
+        max-width: 46ch;
+        margin: 14px 0 20px;
+      }
+      .crate {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        background: linear-gradient(160deg, #2e7d42, #1e5b32);
+        padding: 14px;
+        border-radius: 22px;
+        transform: rotate(1.5deg);
+      }
+      .crate span {
+        aspect-ratio: 1;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        font-size: clamp(2rem, 7vw, 3.4rem);
+        background: rgba(255, 255, 255, 0.14);
+        box-shadow: inset 0 -6px 12px rgba(0, 0, 0, 0.18);
+      }
+      .bar {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+        display: grid;
+        grid-template-columns: 2fr 1.2fr 1.2fr 1fr;
+        gap: 10px;
+        position: sticky;
+        top: env(safe-area-inset-top, 0px);
+        z-index: 5;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 11px 12px;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--ink);
+        font: inherit;
+      }
+      .chips {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin: 14px 0;
+      }
+      .chip {
+        border: 1px solid var(--line);
+        background: var(--card);
+        color: var(--ink);
+        padding: 7px 14px;
+        border-radius: 99px;
+        cursor: pointer;
+        font:
+          600 0.92rem Figtree,
+          sans-serif;
+      }
+      .chip[aria-pressed="true"] {
+        background: var(--green);
+        color: var(--onG);
+        border-color: var(--green);
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 18px;
+        padding-bottom: 30px;
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        transition: transform 0.15s;
+      }
+      .card:hover {
+        transform: translateY(-3px);
+      }
+      .art {
+        height: 170px;
+        display: grid;
+        place-items: center;
+        position: relative;
+        overflow: hidden;
+      }
+      .art .e {
+        font-size: 5.6rem;
+        filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.25));
+      }
+      .art::after {
+        content: "";
+        position: absolute;
+        left: -10%;
+        right: -10%;
+        bottom: -30px;
+        height: 60px;
+        background: rgba(255, 255, 255, 0.22);
+        border-radius: 50%;
+        filter: blur(4px);
+      }
+      .art img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        inset: 0;
+      }
+      .fresh {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--sun);
+        color: #2b2100;
+        font: 600 0.75rem Figtree;
+        padding: 3px 10px;
+        border-radius: 99px;
+        z-index: 2;
+      }
+      .cb {
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        flex: 1;
+      }
+      .price {
+        font:
+          800 1.35rem "Bricolage Grotesque",
+          sans-serif;
+        color: var(--green);
+      }
+      .price small {
+        font: 400 0.85rem Figtree;
+        color: var(--mute);
+      }
+      .meta {
+        color: var(--mute);
+        font-size: 0.9rem;
+      }
+      .stars {
+        color: var(--sun);
+        letter-spacing: 1px;
+        white-space: nowrap;
+      }
+      .stars i {
+        color: var(--line);
+        font-style: normal;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.55);
+        display: none;
+        align-items: flex-start;
+        justify-content: center;
+        overflow: auto;
+        padding: 20px 12px;
+        z-index: 20;
+      }
+      .modal.on {
+        display: flex;
+      }
+      .sheet {
+        background: var(--card);
+        border-radius: 20px;
+        max-width: 560px;
+        width: 100%;
+        overflow: hidden;
+      }
+      .sheet .in {
+        padding: 18px;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin: 10px 0 4px;
+      }
+      .rate {
+        display: flex;
+        gap: 4px;
+        font-size: 2rem;
+      }
+      .star {
+        background: none;
+        border: 0;
+        cursor: pointer;
+        color: var(--line);
+        font-size: 2rem;
+        padding: 0;
+        line-height: 1;
+      }
+      .star.on {
+        color: var(--sun);
+      }
+      .rev {
+        border-top: 1px solid var(--line);
+        padding: 10px 0;
+      }
+      .sell {
+        background: var(--green);
+        color: var(--onG);
+        border-radius: 22px;
+        padding: 28px;
+        margin: 10px 0 34px;
+      }
+      .sell h2 {
+        font-size: 2rem;
+      }
+      .sell .grid2 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .sell b {
+        display: block;
+        font: 800 1.1rem "Bricolage Grotesque";
+      }
+      .photo {
+        border: 2px dashed var(--leaf);
+        border-radius: 14px;
+        padding: 14px;
+        text-align: center;
+        cursor: pointer;
+        display: block;
+      }
+      .photo img {
+        max-height: 140px;
+        border-radius: 10px;
+        display: block;
+        margin: 8px auto 0;
+      }
+      footer {
+        padding: 24px 0 40px;
+        color: var(--mute);
+        font-size: 0.9rem;
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        background: var(--green);
+        color: var(--onG);
+        padding: 12px 20px;
+        border-radius: 12px;
+        z-index: 30;
+        display: none;
+      }
+      @media (max-width: 760px) {
+        .hero {
+          grid-template-columns: 1fr;
+        }
+        .bar {
+          grid-template-columns: 1fr 1fr;
+          position: static;
+        }
+        .bar input {
+          grid-column: 1/-1;
+        }
+        .sell .grid2 {
+          grid-template-columns: 1fr;
+        }
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <nav>
+        <a class="logo" href="#top">🌱 ShambaSoko</a>
+        <div>
+          <button class="btn ghost" onclick="openSell()">
+            Sell your produce
+          </button>
+        </div>
+      </nav>
+      <section class="hero" id="top">
+        <div>
+          <h1>From the shamba straight to the buyer, across Kenya.</h1>
+          <p>
+            Farmers in all 47 counties list vegetables, poultry, eggs and more.
+            Buyers find fresh produce near them, call the farmer, and rate what
+            they bought.
+          </p>
+          <button class="btn alt" onclick="openSell()">
+            List a product in 2 minutes
+          </button>
+          <a class="btn ghost" href="#market">Browse the market</a>
+        </div>
+        <div class="crate" aria-hidden="true">
+          <span>🍅</span><span>🥬</span><span>🐔</span><span>🥕</span
+          ><span>🥚</span><span>🥑</span><span>🧅</span><span>🥔</span
+          ><span>🌽</span>
+        </div>
+      </section>
+      <section id="market">
+        <div class="bar">
+          <input
+            id="q"
+            placeholder="Search tomatoes, kienyeji, eggs…"
+            aria-label="Search products"
+          /><select id="cty" aria-label="County"></select
+          ><select id="srt" aria-label="Sort">
+            <option value="r">Top rated</option>
+            <option value="p">Lowest price</option>
+            <option value="n">Newest</option></select
+          ><button class="btn" onclick="resetF()">Reset</button>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div id="count" class="meta"></div>
+        <div class="grid" id="grid"></div>
+      </section>
+      <section class="sell">
+        <h2>Farmers: your buyers are waiting.</h2>
+        <div class="grid2">
+          <div>
+            <b>Upload in minutes</b>Pick the product, add a photo, set your
+            price.
+          </div>
+          <div>
+            <b>Sell nationwide</b>Buyers from Turkana to Mombasa can find you.
+          </div>
+          <div><b>Build trust</b>Good ratings bring repeat customers.</div>
+        </div>
+        <p>
+          <button class="btn alt" onclick="openSell()">Start selling</button>
+        </p>
+      </section>
+      <footer>
+        ShambaSoko connects farmers and buyers directly. Agree on price,
+        delivery and payment (M-Pesa or cash) with the seller. Listings and
+        ratings are saved in this browser for this demo.
+      </footer>
+    </div>
+
+    <div
+      class="modal"
+      id="mSell"
+      onclick="if (event.target === this) closeM();"
+    >
+      <div class="sheet">
+        <div class="in">
+          <h2>List your product</h2>
+          <label>What are you selling?</label
+          ><select id="fT"></select>
+          <div class="row">
+            <div>
+              <label>Your name or farm</label
+              ><input id="fN" placeholder="e.g. Wanjiru Greens" />
+            </div>
+            <div>
+              <label>Phone (M-Pesa number)</label
+              ><input id="fPh" inputmode="tel" placeholder="0712 345 678" />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>County</label
+              ><select id="fC"></select>
+            </div>
+            <div>
+              <label>Quantity available</label
+              ><input id="fQ" placeholder="e.g. 200 kg or 50 birds" />
+            </div>
+          </div>
+          <div class="row">
+            <div>
+              <label>Price (KSh)</label
+              ><input id="fP" type="number" min="1" inputmode="numeric" />
+            </div>
+            <div>
+              <label>Per</label
+              ><select id="fU">
+                <option>kg</option>
+                <option>bunch</option>
+                <option>bird</option>
+                <option>tray (30 eggs)</option>
+                <option>crate</option>
+                <option>sack</option>
+                <option>piece</option>
+              </select>
+            </div>
+          </div>
+          <label>Photo of your produce</label>
+          <label class="photo"
+            >📷 Tap to take or choose a photo<input
+              id="fF"
+              type="file"
+              accept="image/*"
+              hidden /><img id="prev" alt="" hidden
+          /></label>
+          <label>Short note (optional)</label
+          ><textarea
+            id="fD"
+            rows="2"
+            placeholder="Harvested this morning, free-range, organic…"
+          ></textarea>
+          <p>
+            <button class="btn" onclick="addItem()">Publish listing</button>
+            <button class="btn ghost" onclick="closeM()">Cancel</button>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="mDet" onclick="if (event.target === this) closeM();">
+      <div class="sheet" id="det"></div>
+    </div>
+    <div class="toast" id="toast" role="status"></div>
+
+    <script>
+      const COUNTIES = [
+        "Baringo",
+        "Bomet",
+        "Bungoma",
+        "Busia",
+        "Elgeyo-Marakwet",
+        "Embu",
+        "Garissa",
+        "Homa Bay",
+        "Isiolo",
+        "Kajiado",
+        "Kakamega",
+        "Kericho",
+        "Kiambu",
+        "Kilifi",
+        "Kirinyaga",
+        "Kisii",
+        "Kisumu",
+        "Kitui",
+        "Kwale",
+        "Laikipia",
+        "Lamu",
+        "Machakos",
+        "Makueni",
+        "Mandera",
+        "Marsabit",
+        "Meru",
+        "Migori",
+        "Mombasa",
+        "Murang’a",
+        "Nairobi",
+        "Nakuru",
+        "Nandi",
+        "Narok",
+        "Nyamira",
+        "Nyandarua",
+        "Nyeri",
+        "Samburu",
+        "Siaya",
+        "Taita-Taveta",
+        "Tana River",
+        "Tharaka-Nithi",
+        "Trans Nzoia",
+        "Turkana",
+        "Uasin Gishu",
+        "Vihiga",
+        "Wajir",
+        "West Pokot",
+      ];
+      const TYPES = [
+        ["Tomatoes", "🍅", "Vegetables"],
+        ["Sukuma wiki (kale)", "🥬", "Vegetables"],
+        ["Cabbages", "🥬", "Vegetables"],
+        ["Onions", "🧅", "Vegetables"],
+        ["Carrots", "🥕", "Vegetables"],
+        ["Capsicum", "🫑", "Vegetables"],
+        ["Potatoes", "🥔", "Vegetables"],
+        ["Kienyeji chicken", "🐔", "Poultry"],
+        ["Broilers", "🍗", "Poultry"],
+        ["Eggs", "🥚", "Eggs"],
+        ["Avocados", "🥑", "Fruits"],
+        ["Bananas", "🍌", "Fruits"],
+        ["Maize", "🌽", "Grains"],
+        ["Other produce", "🌿", "Vegetables"],
+      ];
+      const BG = {
+        Vegetables: "linear-gradient(150deg,#b9e6a0,#5fbf6a)",
+        Poultry: "linear-gradient(150deg,#ffd9a8,#f0a05a)",
+        Eggs: "linear-gradient(150deg,#fff1c2,#f6cf6b)",
+        Fruits: "linear-gradient(150deg,#ffe0a3,#9ad66a)",
+        Grains: "linear-gradient(150deg,#fbe9a0,#e0b84a)",
+      };
+      const CATS = ["All", "Vegetables", "Poultry", "Eggs", "Fruits", "Grains"];
+      const R = (n, s, c) => ({ n, s, c });
+      const SEED = [
+        [
+          "Tomatoes",
+          "Kirinyaga",
+          "Mwangi Fresh Farm",
+          "0711000001",
+          60,
+          "kg",
+          "500 kg",
+          "Ripe Roma tomatoes, picked at dawn.",
+          [
+            R("Achieng", 5, "Firm and juicy, delivered on time."),
+            R("Brian", 4, "Good quality for my kiosk."),
+          ],
+        ],
+        [
+          "Kienyeji chicken",
+          "Machakos",
+          "Kamau Poultry",
+          "0722000002",
+          850,
+          "bird",
+          "120 birds",
+          "Free-range, grain fed, 4 months old.",
+          [
+            R("Mary", 5, "Tasty and well sized."),
+            R("Otieno", 5, "Best kienyeji I have bought."),
+            R("Zawadi", 4, "Fair price."),
+          ],
+        ],
+        [
+          "Eggs",
+          "Nakuru",
+          "Rift Layers",
+          "0733000003",
+          420,
+          "tray (30 eggs)",
+          "80 trays",
+          "Fresh from our layers every morning.",
+          [R("Hotel Savanna", 5, "Consistent supply every week.")],
+        ],
+        [
+          "Sukuma wiki (kale)",
+          "Kiambu",
+          "Wanjiru Greens",
+          "0744000004",
+          20,
+          "bunch",
+          "300 bunches",
+          "Pesticide-free, harvested today.",
+          [
+            R("Faith", 4, "Fresh and clean."),
+            R("Jomo", 5, "Great for my restaurant."),
+          ],
+        ],
+        [
+          "Cabbages",
+          "Nyandarua",
+          "Highland Growers",
+          "0755000005",
+          45,
+          "piece",
+          "900 heads",
+          "Big dense heads from Ol Kalou.",
+          [R("Peter", 4, "Solid heads, little waste.")],
+        ],
+        [
+          "Avocados",
+          "Murang’a",
+          "Kiriaini Orchards",
+          "0766000006",
+          15,
+          "piece",
+          "2000 pieces",
+          "Hass avocados, export grade.",
+          [
+            R("Lucy", 5, "Creamy and perfectly ripe."),
+            R("Ali", 5, "Excellent."),
+          ],
+        ],
+        [
+          "Broilers",
+          "Kajiado",
+          "Maasai Plains Poultry",
+          "0777000007",
+          650,
+          "bird",
+          "200 birds",
+          "Ready at 1.8 kg, vaccinated.",
+          [R("Grace", 4, "Healthy birds.")],
+        ],
+        [
+          "Onions",
+          "Nyandarua",
+          "Njoro Onion Co.",
+          "0788000008",
+          70,
+          "kg",
+          "3 tonnes",
+          "Red onions, well cured.",
+          [],
+        ],
+        [
+          "Carrots",
+          "Nakuru",
+          "Molo Roots",
+          "0799000009",
+          55,
+          "kg",
+          "1 tonne",
+          "Sweet, washed carrots.",
+          [R("Esther", 4, "Crunchy and sweet.")],
+        ],
+        [
+          "Potatoes",
+          "Nyandarua",
+          "Kinangop Spuds",
+          "0700000010",
+          40,
+          "kg",
+          "10 tonnes",
+          "Shangi potatoes, sorted by size.",
+          [R("Kevin", 5, "Great for chips, very clean.")],
+        ],
+      ].map((a, i) => {
+        const t = TYPES.find((x) => x[0] == a[0]);
+        return {
+          id: i + 1,
+          type: a[0],
+          emoji: t[1],
+          cat: t[2],
+          county: a[1],
+          seller: a[2],
+          phone: a[3],
+          price: a[4],
+          unit: a[5],
+          qty: a[6],
+          note: a[7],
+          reviews: a[8],
+          img: "",
+          ts: i,
+        };
+      });
+      let items = SEED,
+        f = { cat: "All" };
+      try {
+        const s = localStorage.getItem("shambasoko-v1");
+        if (s) items = JSON.parse(s);
+      } catch (e) {}
+      function save() {
+        try {
+          localStorage.setItem("shambasoko-v1", JSON.stringify(items));
+        } catch (e) {
+          toast("Saved for now, but this browser is out of storage space.");
+        }
+      }
+      const $ = (id) => document.getElementById(id);
+      const esc = (s) =>
+        String(s).replace(
+          /[&<>"']/g,
+          (c) =>
+            ({
+              "&": "&amp;",
+              "<": "&lt;",
+              ">": "&gt;",
+              '"': "&quot;",
+              "'": "&#39;",
+            })[c],
+        );
+      const avg = (x) =>
+        x.reviews.length
+          ? x.reviews.reduce((a, r) => a + r.s, 0) / x.reviews.length
+          : 0;
+      const stars = (v) => {
+        const n = Math.round(v);
+        return (
+          '<span class="stars" aria-label="' +
+          v.toFixed(1) +
+          ' out of 5">' +
+          "★".repeat(n) +
+          "<i>" +
+          "★".repeat(5 - n) +
+          "</i></span>"
+        );
+      };
+      function toast(m) {
+        const t = $("toast");
+        t.textContent = m;
+        t.style.display = "block";
+        setTimeout(() => (t.style.display = "none"), 2800);
+      }
+      function init() {
+        $("cty").innerHTML =
+          '<option value="">All counties</option>' +
+          COUNTIES.map((c) => "<option>" + c + "</option>").join("");
+        $("fC").innerHTML = COUNTIES.map(
+          (c) => "<option>" + c + "</option>",
+        ).join("");
+        $("fT").innerHTML = TYPES.map(
+          (t, i) =>
+            '<option value="' +
+            i +
+            '">' +
+            t[1] +
+            " " +
+            t[0] +
+            " (" +
+            t[2] +
+            ")</option>",
+        ).join("");
+        $("chips").innerHTML = CATS.map(
+          (c) =>
+            '<button class="chip" aria-pressed="' +
+            (c == "All") +
+            '" data-c="' +
+            c +
+            '">' +
+            c +
+            "</button>",
+        ).join("");
+        $("chips").onclick = (e) => {
+          const c = e.target.dataset.c;
+          if (c) {
+            f.cat = c;
+            document
+              .querySelectorAll(".chip")
+              .forEach((b) => b.setAttribute("aria-pressed", b.dataset.c == c));
+            render();
+          }
+        };
+        ["q", "cty", "srt"].forEach((i) => ($(i).oninput = render));
+        $("fF").onchange = (e) => {
+          const file = e.target.files[0];
+          if (!file) return;
+          shrink(file, (d) => {
+            $("prev").src = d;
+            $("prev").hidden = false;
+            $("prev").dataset.d = d;
+          });
+        };
+        render();
+      }
+      function shrink(file, cb) {
+        const r = new FileReader();
+        r.onload = () => {
+          const im = new Image();
+          im.onload = () => {
+            const m = 640,
+              k = Math.min(1, m / Math.max(im.width, im.height)),
+              c = document.createElement("canvas");
+            c.width = im.width * k;
+            c.height = im.height * k;
+            c.getContext("2d").drawImage(im, 0, 0, c.width, c.height);
+            cb(c.toDataURL("image/jpeg", 0.78));
+          };
+          im.src = r.result;
+        };
+        r.readAsDataURL(file);
+      }
+      function resetF() {
+        $("q").value = "";
+        $("cty").value = "";
+        $("srt").value = "r";
+        f.cat = "All";
+        document
+          .querySelectorAll(".chip")
+          .forEach((b) => b.setAttribute("aria-pressed", b.dataset.c == "All"));
+        render();
+      }
+      function render() {
+        const q = $("q").value.toLowerCase(),
+          c = $("cty").value,
+          s = $("srt").value;
+        let l = items.filter(
+          (x) =>
+            (f.cat == "All" || x.cat == f.cat) &&
+            (!c || x.county == c) &&
+            (!q ||
+              (x.type + x.seller + x.county + x.note)
+                .toLowerCase()
+                .includes(q)),
+        );
+        l.sort((a, b) =>
+          s == "p"
+            ? a.price - b.price
+            : s == "n"
+              ? b.ts - a.ts
+              : avg(b) - avg(a),
+        );
+        $("count").textContent =
+          l.length +
+          " listing" +
+          (l.length == 1 ? "" : "s") +
+          (c ? " in " + c : " across Kenya");
+        $("grid").innerHTML = l.length
+          ? l.map(card).join("")
+          : '<p>No listings match yet. Try another county, or be the first to <a href="#" onclick="openSell();return false">list this product</a>.</p>';
+      }
+      function card(x) {
+        const a = avg(x);
+        return (
+          '<article class="card" tabindex="0" onclick="openDet(' +
+          x.id +
+          ")\" onkeydown=\"if(event.key==='Enter')openDet(" +
+          x.id +
+          ')"><div class="art" style="background:' +
+          BG[x.cat] +
+          '">' +
+          (x.img
+            ? '<img src="' + x.img + '" alt="' + esc(x.type) + '">'
+            : '<span class="e">' + x.emoji + "</span>") +
+          '<span class="fresh">Fresh listing</span></div><div class="cb"><h3>' +
+          esc(x.type) +
+          '</h3><div class="price">KSh ' +
+          x.price +
+          " <small>per " +
+          esc(x.unit) +
+          "</small></div><div>" +
+          (x.reviews.length
+            ? stars(a) +
+              ' <span class="meta">' +
+              a.toFixed(1) +
+              " (" +
+              x.reviews.length +
+              ")</span>"
+            : '<span class="meta">No ratings yet</span>') +
+          '</div><div class="meta">' +
+          esc(x.seller) +
+          ", " +
+          esc(x.county) +
+          "</div></div></article>"
+        );
+      }
+      let cur = 0,
+        pick = 0;
+      function openDet(id) {
+        cur = id;
+        pick = 0;
+        const x = items.find((i) => i.id == id),
+          a = avg(x),
+          ph = x.phone.replace(/\D/g, "").replace(/^0/, "254");
+        $("det").innerHTML =
+          '<div class="art" style="background:' +
+          BG[x.cat] +
+          ';height:210px">' +
+          (x.img
+            ? '<img src="' + x.img + '" alt="' + esc(x.type) + '">'
+            : '<span class="e">' + x.emoji + "</span>") +
+          '</div><div class="in"><h2>' +
+          esc(x.type) +
+          '</h2><div class="price">KSh ' +
+          x.price +
+          " <small>per " +
+          esc(x.unit) +
+          "</small></div><p>" +
+          esc(x.note) +
+          '</p><p class="meta">Seller: <b>' +
+          esc(x.seller) +
+          "</b> in " +
+          esc(x.county) +
+          " County<br>Available: " +
+          esc(x.qty) +
+          "</p><p>" +
+          (x.reviews.length
+            ? stars(a) +
+              " " +
+              a.toFixed(1) +
+              " from " +
+              x.reviews.length +
+              " buyer" +
+              (x.reviews.length > 1 ? "s" : "")
+            : "No ratings yet") +
+          '</p><p><a class="btn" href="tel:+' +
+          ph +
+          '">Call seller</a> <a class="btn alt" href="https://wa.me/' +
+          ph +
+          "?text=" +
+          encodeURIComponent(
+            "Hello, I saw your " + x.type + " on ShambaSoko.",
+          ) +
+          '" target="_blank" rel="noopener">WhatsApp</a> <button class="btn ghost" onclick="closeM()">Close</button></p><h3>Rate this seller</h3><div class="rate" id="rt">' +
+          [1, 2, 3, 4, 5]
+            .map(
+              (n) =>
+                '<button class="star" aria-label="' +
+                n +
+                ' stars" onclick="setR(' +
+                n +
+                ')">★</button>',
+            )
+            .join("") +
+          '</div><input id="rNm" placeholder="Your name" style="margin:8px 0"><textarea id="rCm" rows="2" placeholder="How was the produce and delivery?"></textarea><p><button class="btn" onclick="addRev()">Submit rating</button></p><h3>Buyer reviews</h3><div id="rv">' +
+          revs(x) +
+          "</div></div>";
+        $("mDet").classList.add("on");
+      }
+      const revs = (x) =>
+        x.reviews.length
+          ? x.reviews
+              .slice()
+              .reverse()
+              .map(
+                (r) =>
+                  '<div class="rev">' +
+                  stars(r.s) +
+                  " <b>" +
+                  esc(r.n) +
+                  "</b><br>" +
+                  esc(r.c) +
+                  "</div>",
+              )
+              .join("")
+          : '<p class="meta">Be the first to rate this seller.</p>';
+      function setR(n) {
+        pick = n;
+        document
+          .querySelectorAll("#rt .star")
+          .forEach((b, i) => b.classList.toggle("on", i < n));
+      }
+      function addRev() {
+        if (!pick) {
+          toast("Tap a star to choose your rating.");
+          return;
+        }
+        const x = items.find((i) => i.id == cur);
+        x.reviews.push(
+          R(
+            ($("rNm").value.trim() || "Buyer").slice(0, 40),
+            pick,
+            $("rCm").value.trim().slice(0, 300) || "No comment.",
+          ),
+        );
+        save();
+        toast("Rating submitted. Thank you!");
+        openDet(cur);
+        render();
+      }
+      function openSell() {
+        $("mSell").classList.add("on");
+      }
+      function closeM() {
+        document
+          .querySelectorAll(".modal")
+          .forEach((m) => m.classList.remove("on"));
+      }
+      function addItem() {
+        const t = TYPES[$("fT").value],
+          n = $("fN").value.trim(),
+          ph = $("fPh").value.trim(),
+          p = +$("fP").value;
+        if (!n || ph.replace(/\D/g, "").length < 9 || !p) {
+          toast("Add your name, a valid phone number and a price.");
+          return;
+        }
+        items.unshift({
+          id: Date.now(),
+          type: t[0],
+          emoji: t[1],
+          cat: t[2],
+          county: $("fC").value,
+          seller: n,
+          phone: ph,
+          price: p,
+          unit: $("fU").value,
+          qty: $("fQ").value.trim() || "Ask seller",
+          note: $("fD").value.trim() || "Fresh from the farm.",
+          reviews: [],
+          img: $("prev").dataset.d || "",
+          ts: Date.now(),
+        });
+        save();
+        ["fN", "fPh", "fP", "fQ", "fD"].forEach((i) => ($(i).value = ""));
+        $("prev").hidden = true;
+        $("prev").dataset.d = "";
+        closeM();
+        resetF();
+        toast("Published. Buyers can now see your listing.");
+        location.hash = "market";
+      }
+      document.addEventListener("keydown", (e) => {
+        if (e.key == "Escape") closeM();
+      });
+      init();
+    </script>
+  </body>
+</html>
